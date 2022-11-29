@@ -1,0 +1,19 @@
+.icon{
+    height: 150px;
+}
+
+.fallAnim{
+
+}
+
+@keyframes fallAnim {
+    from{
+        transform: rotateX(0);
+        transform: translateY(0);
+    }
+    to
+    {
+        transform: translateY(-400);
+        transform: rotateX(720);
+    }
+}

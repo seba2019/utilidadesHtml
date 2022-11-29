@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.js"></script>
+
+</head>
+<body onload="init()">
+    <input type="text" name="" id="currency" class="currency text-right" >
+    <!-- <input type="text" name="" id="money" class=" text-right" > -->
+    <h2 >
+        <span id="valor"></span>
+    </h2>
+    
+</body>
+<script>
+    $('body').on('propertychange input', '.currency', forceNumeric);
+    function forceNumeric() {
+        var $input = $(this);
+        $input.val($input.val().replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^,]/, '0'));
+        
+        $("#valor").text(formatter.format(parseFloat($("#currency").val()).toFixed(2)))
+        // var lenLastPoint = 0;
+        // if($("#currency").val().toString().split('.').length>1)
+        // {
+        //     lenLastPoint = 1;
+    
+        // }
+        // // console.log(lenLastPoint);
+
+    }
+    const formatter = new Intl.NumberFormat('es-AR', {
+        style: 'currency',
+        currency: 'ARS',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 3
+        // These options are needed to round to whole numbers if that's what you want.
+        //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+        //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+    });
+
+    $('#money').on('keyup', function () {
+            let val = parseInt($(this).val().replace(/\D/g, ''))/100
+            val = isNaN(val) ? 0 : val
+            $(this).val(val)
+        })
+
+    function init()
+    {
+        $("#valor").text(formatter.format(0))
+    }
+</script>
+</html>

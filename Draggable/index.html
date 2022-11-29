@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-drag">
+        <div class="elements-drag" >
+            <span class="item-drag" data-value="1" draggable="true" ondragstart="onDrag(event)">Elemento 1</span>
+            <span class="item-drag" data-value="2" draggable="true" ondragstart="onDrag(event)">Elemento 2</span>
+            <span class="item-drag" data-value="3" draggable="true" ondragstart="onDrag(event)">Elemento 3</span>
+            <span class="item-drag" data-value="4" draggable="true" ondragstart="onDrag(event)">Elemento 4</span>
+        </div>
+    </div>
+    <hr>
+    <div class="container-drag" ondragover="prevent(event)" ondrop="drop(event)">
+        <div class="elements-drag recipient-drag"></div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function onDrag(e)
+    {
+        e.dataTransfer.setData("item",e.target.dataset.value);
+    }
+
+    function prevent(e)
+    {
+        e.preventDefault();
+    }
+
+    function drop(e)
+    {
+        var item = e.dataTransfer.getData("item");
+        var elem = document.querySelector("span[data-value='"+item+"']").textContent;
+        document.getElementsByClassName("recipient-drag")[0].innerHTML+= '<span class="item-drag">'+elem+'</span>';
+        e.preventDefault();
+    }
+
+</script>
+</html>

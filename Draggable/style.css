@@ -1,0 +1,19 @@
+.item-drag{
+    display: block;
+}
+
+.item-drag:hover{
+    background-color: cornflowerblue;
+    color: white;
+    cursor: grab;
+}
+
+.container-drag{
+    height: 200px;
+    overflow: auto;
+    border: 1px black solid;
+}
+
+.elements-drag{
+    padding: 7px 5px;
+}
